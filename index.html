@@ -131,10 +131,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <h1>Ask a Question</h1>
     <form>
       <input type="text" id="question" placeholder="Enter your question here...">
-      <button type="button" onclick="getResponse()">Submit</button>
+      <button id="submit-button" type="button" onclick="getResponse()">Submit</button>
+      
+
     </form>
     <p id="response"></p>
     <script>
+      document.getElementById("submit-button").addEventListener("click", getResponse);
       function getResponse() {
         // Get the question from the input box
         var question = document.getElementById("question").value;
