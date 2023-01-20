@@ -128,40 +128,41 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         <img style="width: 100%; border: 4px solid blue" src="DrillQuiz.png"/>
         <p style="width: 100%; border: 4px solid blue">
       
-    <h1>Ask a Question</h1>
-    <form>
-      <input type="text" id="question" placeholder="Enter your question here...">
-      <button id="submit-button" type="button" onclick="getResponse()">Submit</button>
-      
-
-    </form>
-    <p id="response"></p>
-    <script>
-      document.getElementById("submit-button").addEventListener("click", getResponse);
-      function getResponse() {
-        // Get the question from the input box
-        var question = document.getElementById("question").value;
-        // Use the OpenAI API to generate a response to the question
-        fetch("https://api.openai.com/v1/engines/davinci-codex/completions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer <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>"
-          },
-          body: JSON.stringify({
-            "prompt": question,
-            "max_tokens": 100
-          })
-        })
-        .then(response => response.json())
-        .then(data => {
-          // Extract the response from the API data
-          var response = data.choices[0].text;
-          // Display the response on the page
-          document.getElementById("response").innerHTML = response;
-        });
-      }
-    </script>
+          <p>
+            <h1>Ask a Question</h1>
+            <form>
+              <input type="text" id="question" placeholder="Enter your question here...">
+              <button type="submit" id="submit-button">Submit</button>
+            </form>
+            <p id="response"></p>
+            <script>
+              document.getElementById("submit-button").addEventListener("click", event => {
+                event.preventDefault();
+                // Get the question from the input box
+                var question = document.getElementById("question").value;
+                // Use the OpenAI API to generate a response to the question
+                fetch("https://api.openai.com/v1/engines/davinci-codex/completions", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer <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>"
+                  },
+                  body: JSON.stringify({
+                    "prompt": question,
+                    "max_tokens": 100
+                  })
+                })
+                .then(response => response.json())
+                .then(data => {
+                  // Extract the response from the API data
+                  var response = data.choices[0].text;
+                  // Display the response on the page
+                  document.getElementById("response").innerHTML = response;
+                });
+              });
+            </script>
+          </p>
+          
 
 
         </p>
